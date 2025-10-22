@@ -1,3 +1,4 @@
+// src/components/common/navigation/NavigationTop.tsx
 "use client"
 
 import React from "react"
@@ -12,16 +13,23 @@ import { useTheme } from "@/hooks/theme/theme-provider"
 import { Menu, Moon, Sun, Monitor, Languages } from "lucide-react"
 
 const iconBtn =
-    "h-11 w-11 min-h-11 min-w-11 rounded-xl text-foreground/80 " +
-    "hover:text-foreground hover:bg-foreground/5 active:bg-foreground/10 " +
-    "[-webkit-tap-highlight-color:transparent] focus-visible:ring-1 focus-visible:ring-ring"
+    "h-11 w-11 rounded-xl bg-transparent !bg-transparent appearance-none " +
+    "[-webkit-tap-highlight-color:transparent] shadow-none " +
+    "text-foreground/80 hover:text-foreground hover:bg-foreground/5 active:bg-foreground/10 " +
+    "focus-visible:ring-1 focus-visible:ring-ring"
 
 export const NavigationTop: React.FC = () => {
     const { theme, setTheme } = useTheme()
     const handleThemeChange = (mode: "light" | "dark" | "system") => setTheme(mode)
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header
+            className="
+        sticky top-0 z-50 w-full border-b border-border/40
+        bg-background/95 supports-[backdrop-filter]:bg-background/70
+        supports-[backdrop-filter]:backdrop-blur
+      "
+        >
             <div className="mx-auto flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
                 {/* Left */}
                 <div className="flex items-center gap-3">
@@ -45,7 +53,7 @@ export const NavigationTop: React.FC = () => {
                 </div>
 
                 {/* Right */}
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center space-x-2 isolate">
                     {/* Language */}
                     <Button
                         variant="ghost"
@@ -63,7 +71,7 @@ export const NavigationTop: React.FC = () => {
                                 variant="ghost"
                                 size="icon"
                                 aria-label="Toggle theme"
-                                className={`${iconBtn} data-[state=open]:bg-foreground/7`}
+                                className={`${iconBtn} data-[state=open]:bg-foreground/10`}
                             >
                                 {theme === "dark" ? (
                                     <Moon className="h-5 w-5" />
