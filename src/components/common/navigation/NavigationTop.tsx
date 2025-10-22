@@ -9,13 +9,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/hooks/theme/theme-provider"
-import {
-    Menu,
-    Moon,
-    Sun,
-    Monitor,
-    Languages,
-} from "lucide-react"
+import { Menu, Moon, Sun, Monitor, Languages } from "lucide-react"
+
+const iconBtn =
+    "h-11 w-11 min-h-11 min-w-11 rounded-xl text-foreground/80 " +
+    "hover:text-foreground hover:bg-foreground/5 active:bg-foreground/10 " +
+    "[-webkit-tap-highlight-color:transparent] focus-visible:ring-1 focus-visible:ring-ring"
 
 export const NavigationTop: React.FC = () => {
     const { theme, setTheme } = useTheme()
@@ -24,9 +23,8 @@ export const NavigationTop: React.FC = () => {
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
-                {/* Left ───────────────────────────── */}
+                {/* Left */}
                 <div className="flex items-center gap-3">
-
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center space-x-1 ml-6 text-sm">
                         {[
@@ -38,7 +36,7 @@ export const NavigationTop: React.FC = () => {
                             <a
                                 key={label}
                                 href={href}
-                                className="rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                                className="rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
                             >
                                 {label}
                             </a>
@@ -46,14 +44,14 @@ export const NavigationTop: React.FC = () => {
                     </nav>
                 </div>
 
-                {/* Right ───────────────────────────── */}
-                <div className="flex items-center space-x-2">
+                {/* Right */}
+                <div className="flex items-center gap-1.5">
                     {/* Language */}
                     <Button
                         variant="ghost"
                         size="icon"
                         aria-label="Change language"
-                        className="hover:bg-muted/50"
+                        className={iconBtn}
                     >
                         <Languages className="h-[18px] w-[18px]" />
                     </Button>
@@ -61,7 +59,12 @@ export const NavigationTop: React.FC = () => {
                     {/* Theme toggle */}
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" aria-label="Toggle theme">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                aria-label="Toggle theme"
+                                className={`${iconBtn} data-[state=open]:bg-foreground/7`}
+                            >
                                 {theme === "dark" ? (
                                     <Moon className="h-5 w-5" />
                                 ) : theme === "light" ? (
@@ -71,7 +74,11 @@ export const NavigationTop: React.FC = () => {
                                 )}
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-36">
+                        <DropdownMenuContent
+                            align="end"
+                            sideOffset={8}
+                            className="w-36 bg-popover border border-border/50 rounded-xl shadow-md"
+                        >
                             <DropdownMenuItem onClick={() => handleThemeChange("light")}>
                                 <Sun className="mr-2 h-4 w-4" /> Light
                             </DropdownMenuItem>
@@ -84,40 +91,23 @@ export const NavigationTop: React.FC = () => {
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    {/* User Profile */}
-                    {/*<DropdownMenu>*/}
-                    {/*    <DropdownMenuTrigger asChild>*/}
-                    {/*        <Button variant="ghost" className="pl-1 pr-2 flex items-center gap-2">*/}
-                    {/*            <Avatar className="h-7 w-7 border border-border">*/}
-                    {/*                <AvatarImage*/}
-                    {/*                />*/}
-                    {/*                <AvatarFallback>EC</AvatarFallback>*/}
-                    {/*            </Avatar>*/}
-                    {/*            <ChevronDown className="h-4 w-4 opacity-70" />*/}
-                    {/*        </Button>*/}
-                    {/*    </DropdownMenuTrigger>*/}
-                    {/*    <DropdownMenuContent align="end" className="w-44">*/}
-                    {/*        <DropdownMenuItem className="font-medium">*/}
-                    {/*            <User className="mr-2 h-4 w-4" /> Profile*/}
-                    {/*        </DropdownMenuItem>*/}
-                    {/*        <DropdownMenuItem>*/}
-                    {/*            <Settings className="mr-2 h-4 w-4" /> Settings*/}
-                    {/*        </DropdownMenuItem>*/}
-                    {/*        <Separator className="my-1" />*/}
-                    {/*        <DropdownMenuItem className="text-destructive">*/}
-                    {/*            <LogOut className="mr-2 h-4 w-4" /> Log out*/}
-                    {/*        </DropdownMenuItem>*/}
-                    {/*    </DropdownMenuContent>*/}
-                    {/*</DropdownMenu>*/}
-
                     {/* Mobile Menu */}
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="lg:hidden">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className={`lg:hidden ${iconBtn}`}
+                                aria-label="Open menu"
+                            >
                                 <Menu className="h-5 w-5" />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuContent
+                            align="end"
+                            sideOffset={8}
+                            className="w-48 bg-popover border border-border/50 rounded-xl shadow-md"
+                        >
                             {[
                                 ["홈", "/"],
                                 ["뉴스", "/workspace"],
