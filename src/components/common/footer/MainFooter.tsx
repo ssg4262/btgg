@@ -120,7 +120,7 @@ export const MainFooter: React.FC = () => {
     ];
 
     return (
-        <footer className="bg-white dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
+        <footer className="bg-white dark:bg-[#0d0d0d]">
             <div className="max-w-[1400px] mx-auto px-6 py-12">
                 {/* Main Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-12">
