@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from "react";
 import { Button } from "@/components/ui/button"
-
+import coin from '@/assets/image/coin.png'
 
 export const MainHero:React.FC = () => {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -47,7 +47,7 @@ export const MainHero:React.FC = () => {
                             style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
                         >
                             <img
-                                src="src/assets/image/coin.png"
+                                src={coin}
                                 alt="Coin"
                                 className="w-[280px] h-[280px] md:w-[400px] md:h-[400px] object-contain"
                             />
