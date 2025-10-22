@@ -34,12 +34,11 @@ export const MainHero:React.FC = () => {
                             <Button
                                 size="lg"
                                 className="
-                                    rounded-full px-6 h-11
-                                    appearance-none
-                                    bg-neutral-950 text-white
-                                    hover:bg-neutral-950/90
-                                    dark:bg-white dark:text-black
-                                    border border-black/10 dark:border-white/20
+                                rounded-full px-6 h-11
+                                appearance-none
+                                [background-color:#000] text-white
+                                hover:[background-color:rgba(0,0,0,0.9)]
+                                dark:[background-color:#fff] dark:text-black
                               "
                             >
                                 SuperChart 보기
