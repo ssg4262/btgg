@@ -33,7 +33,7 @@ export const MainHero:React.FC = () => {
                         <div className="mt-6 flex items-center justify-center">
                             <Button
                                 size="lg"
-                                className="rounded-full px-6 h-11 bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black"
+                                className="rounded-full px-6 h-11 bg-black text-white hover:bg-black dark:bg-white dark:text-black"
                             >
                                 SuperChart 보기
                             </Button>
