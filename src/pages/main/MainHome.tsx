@@ -4,6 +4,7 @@ import {MainLayout} from "@/layouts/main/MainLayout.tsx"
 import { Separator } from "@/components/ui/separator"
 import {MainHero} from "@/components/hero/main/MainHero.tsx";
 import React from "react";
+import {MainFooter} from "@/components/common/footer/MainFooter.tsx";
 
 
 
@@ -26,6 +27,8 @@ export const MainHome: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <MainFooter/>
         </MainLayout>
     )
 }
