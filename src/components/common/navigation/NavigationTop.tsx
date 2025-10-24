@@ -2,6 +2,7 @@
 "use client"
 
 import React from "react"
+import { NavLink, useLocation } from "react-router-dom"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -18,9 +19,18 @@ const iconBtn =
     "text-foreground/80 hover:text-foreground hover:bg-foreground/5 active:bg-foreground/10 " +
     "focus-visible:ring-1 focus-visible:ring-ring"
 
+type NavItem = { label: string; href: string }
+const NAV_ITEMS: NavItem[] = [
+    { label: "홈", href: "/" },
+    { label: "차트", href: "/chart" },
+    { label: "뉴스", href: "/news" },
+    { label: "코인골라보기", href: "/tools" },
+]
+
 export const NavigationTop: React.FC = () => {
     const { theme, setTheme } = useTheme()
     const handleThemeChange = (mode: "light" | "dark" | "system") => setTheme(mode)
+    const { pathname } = useLocation()
 
     return (
         <header
@@ -35,19 +45,23 @@ export const NavigationTop: React.FC = () => {
                 <div className="flex items-center gap-3">
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center space-x-1 ml-6 text-sm">
-                        {[
-                            ["홈", "/"],
-                            ["뉴스", "/workspace"],
-                            ["코인골라보기", "/tools"],
-                            ["차트", "/chart"],
-                        ].map(([label, href]) => (
-                            <a
-                                key={label}
-                                href={href}
-                                className="rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
+                        {NAV_ITEMS.map(({ label, href }) => (
+                            <NavLink
+                                key={href}
+                                to={href}
+                                aria-current={pathname === href ? "page" : undefined}
+                                className={({ isActive }) =>
+                                    [
+                                        "rounded-md px-3 py-2 transition-colors",
+                                        isActive
+                                            ? "bg-foreground/10 text-foreground"
+                                            : "text-muted-foreground hover:text-foreground hover:bg-foreground/5",
+                                    ].join(" ")
+                                }
+                                end
                             >
                                 {label}
-                            </a>
+                            </NavLink>
                         ))}
                     </nav>
                 </div>
@@ -116,16 +130,16 @@ export const NavigationTop: React.FC = () => {
                             sideOffset={8}
                             className="w-48 bg-popover border border-border/50 rounded-xl shadow-md"
                         >
-                            {[
-                                ["홈", "/"],
-                                ["뉴스", "/workspace"],
-                                ["코인골라보기", "/tools"],
-                                ["차트", "/chart"],
-                            ].map(([label, href]) => (
-                                <DropdownMenuItem key={label} asChild>
-                                    <a href={href} className="w-full">
+                            {NAV_ITEMS.map(({ label, href }) => (
+                                <DropdownMenuItem key={href} asChild>
+                                    {/* Radix(shadcn) + React Router 조합: asChild로 NavLink 감싸기 */}
+                                    <NavLink
+                                        to={href}
+                                        className="w-full block px-2 py-1.5"
+                                        end
+                                    >
                                         {label}
-                                    </a>
+                                    </NavLink>
                                 </DropdownMenuItem>
                             ))}
                         </DropdownMenuContent>
